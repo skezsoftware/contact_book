@@ -43,3 +43,44 @@ def update_contact():
             contacts[contact_num - 1] = {"name": name, "phone": phone, "email": email}
             save_contacts(contacts)
             print(f"Contact {contact_num} updated.")
+        else:
+            print("Invalid contact number.")
+
+def delete_contact():
+    contacts = load_contacts()
+    view_contacts()
+    if contacts:
+        contact_num = int(input("Enter the contact numner to delete: "))
+        if 1 <= contact_num <= len(contacts):
+            removed_contact = contacts.pop(contact_num - 1)
+            save_contacts(contacts)
+            print(f"Contact '{removed_contact['name']}' deleted.")
+        else:
+            print("Invalid contact number.")
+
+def main():
+    while True:
+        print("\nContact Book CLI App")
+        print("1. Add Contact")
+        print("2. View Contacts")
+        print("3. Update Contact")
+        print("4. Delete Contact")
+        print("5. Exit")
+        choice = input("Enter your choice: ").strip()
+
+        if choice == "1":
+            add_contact()
+        elif choice == "2":
+            view_contacts()
+        elif choice == "3":
+            update_contact()
+        elif choice == "4":
+            delete_contact()
+        elif choice == "5":
+            print("Exiting the app.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
